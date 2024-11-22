@@ -30,3 +30,5 @@ jobs:
       # Executa os testes Cypress
       - name: Run Cypress Tests
         run: npm run test # Certifique-se de que este script está configurado no package.json
+
+        
