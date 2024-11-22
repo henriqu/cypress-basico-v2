@@ -1,12 +1,32 @@
-name: End-to-end tests 🧪
-on: [push]
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - main # Certifique-se de que este é o nome correto da sua branch principal
+  pull_request: # Opcional: Execute também em pull requests
+    branches:
+      - main
+
 jobs:
-  cypress-run:
-    runs-on: ubuntu-20.04
+  test:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      # Baixa o código do repositório
+      - name: Checkout Repository
         uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+
+      # Configura o Node.js na versão desejada
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20 # Use a versão 16 ou superior, já que você mencionou usar Node.js 16.20.2
+
+      # Instala as dependências do projeto
+      - name: Install Dependencies
+        run: npm install
+
+      # Executa os testes Cypress
+      - name: Run Cypress Tests
+        run: npm run test # Certifique-se de que este script está configurado no package.json
